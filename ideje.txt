@@ -1,0 +1,6 @@
+1. recimo za neki film prikazati osnovne podatke, ali ako kliknem na detalje  
+poslati zahtjev omdb apiju sa naslovom filma i ispisati detalje
+2. sta cu sa posterom za filmove iz Home.vue? (pogledati mozda link movie_posters iz fast fita)
+3. kada se pogodi search by name ili search by imdb id pogoditi omdb api i omoguciti prikaz
+filmova sa apija 
+  
