@@ -3,6 +3,7 @@ import Login from "./components/Login.vue";
 import Register from "./components/Register.vue";
 import Movies from "./components/movies/Movies.vue";
 import Movie from "./components/movies/Movie.vue";
+import MovieDetailsFromApi from "./components/movies/MovieDetailsFromApi.vue";
 const Profile = () => import("./components/Profile.vue");
 const AddCustomList = () => import("./components/customList/AddCustomList.vue")
 const CustomLists = () => import("./components/customList/CustomLists.vue");
@@ -43,6 +44,10 @@ const routes = [
     {
       path: "/showMovieDetails/:id",
       component: Movie
+    },
+    {
+      path: "/requestDetailedMovieInfo/:title",
+      component: MovieDetailsFromApi
     }
   ];
   

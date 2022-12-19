@@ -3,10 +3,15 @@
         <form>
             <h4> Movie </h4>
             <div class="form-group">
-                <label for="name"> Title </label>
-                <input type="text" class="form-control" id="title" v-model="currentMovie.title"/>
+                <label for="title"><strong> Title </strong></label>
+                {{currentMovie.title}}
             </div>
         </form>
+
+        <div>
+            <input type="text" class="form-control" v-model="currentMovie.title"/>
+            <router-link :to="'/requestDetailedMovieInfo/' + currentMovie.title" class="badne badge-warning"> Request detailed information about movie </router-link>
+        </div>
     </div>
 
     <div v-else>
@@ -33,7 +38,6 @@ export default {
         .then(response => {
           this.currentMovie = response.data;
           console.log(this.currentMovie[0].title);
-          //console.log(response.data);
         })
         .catch(e => {
           console.log(e);

@@ -13,9 +13,10 @@ class MovieService {
         return axios.get(API_URL + 'all', { headers: authHeader()});
     }
 
-    searchByTitle(title) {
-        return axios.get(API_URL + `getByTitle?title=${title}`, {headers: authHeader()});
+    getDetailedMovieInfoFromApi(title) {
+        return axios.get(API_URL + `searchTitle/${title}`, { headers: authHeader()})
     }
+
 }
 
 export default new MovieService();
