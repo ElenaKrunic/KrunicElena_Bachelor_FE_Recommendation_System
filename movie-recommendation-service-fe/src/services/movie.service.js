@@ -17,6 +17,10 @@ class MovieService {
         return axios.get(API_URL + `searchTitle/${title}`, { headers: authHeader()})
     }
 
+    rateMovie(id, data) {
+        return axios.put(API_URL + `rateMovie/${id}` , data, { headers: authHeader()})
+    }
+
 }
 
 export default new MovieService();

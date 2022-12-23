@@ -76,6 +76,10 @@ export default {
             MovieService.getDetailedMovieInfoFromApi(title)
                 .then(response => {
                     this.currentMovie = response.data;
+                    //ovde odraditi setItem('movieId', currentMovie[0].movieId)
+                    //ali prvo ucitati movieId
+                    alert(this.currentMovie[0].movieId)
+                    alert(this.currentMovie[0].title);
                     console.log(response.data);
                 })
                 .catch(e => {
