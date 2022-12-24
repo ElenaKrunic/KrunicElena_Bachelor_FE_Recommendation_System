@@ -1,5 +1,5 @@
 <template>
-    <div>
+       <div>
         <form>
             <h4> Movie </h4>
             <div class="form-group">
@@ -14,40 +14,44 @@
           
         </form>
   
-        <button type="submit" class="badge badge-success" @click="rateMovie"> Rate </button>
+        <button type="submit" class="badge badge-success" @click="leaveReview"> Leave review </button>
             
     </div>
 </template>
 
 <script>
-import RatingService from "@/services/rating.service.js";
+import ReviewService from "@/services/review.service.js";
 
 export default {
-    name : "RateMovies",
+    name : "LeaveReview",
     data() {
         return {
             userId: localStorage.getItem("userId"),
             movieId: localStorage.getItem("movieId"),
-            movieRates: [
+            movieReviews: [
                 {
                     movieId: localStorage.getItem("movieId"),
-                    rate: this.$route.params.rate 
+                    review: this.$route.params.review
                 }
             ]
         }
     },
 
     methods: {
-        rateMovie() { 
-        RatingService.rateMovie(this.userId, this.movieRates)
-            .then(response => {
-                console.log("uslo u try")
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            })
+        leaveReview() {
+            ReviewService.leaveReview(this.userId, this.movieReviews)
+                .then(response => {
+                    console.log("uslo u try za review")
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+        }
     }
-    },
 }
 </script>
+
+<style scoped>
+
+</style>

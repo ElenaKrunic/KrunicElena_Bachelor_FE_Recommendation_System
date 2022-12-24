@@ -6,6 +6,7 @@ import Movie from "./components/movies/Movie.vue";
 import MovieDetailsFromApi from "./components/movies/MovieDetailsFromApi.vue";
 import AddMovie from "./components/movies/AddMovie.vue";
 import RateMovies from "./components/recommendations/RateMovies.vue";
+import LeaveReview from "./components/recommendations/LeaveReview.vue"
 import Recommendations from "./components/recommendations/Recommendations.vue";
 const Profile = () => import("./components/Profile.vue");
 const AddCustomList = () => import("./components/customList/AddCustomList.vue")
@@ -55,6 +56,10 @@ const routes = [
     {
       path: "/rateMovie/:rate",
       component:RateMovies
+    },
+    {
+      path: "/leaveReview/:review",
+      component:LeaveReview
     },
     {
       path: "/addMovie",

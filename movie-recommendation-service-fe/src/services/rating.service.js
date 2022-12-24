@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:2235/api/movieRates/';
+const API_URL = 'http://localhost:2235/api/movieRatesAndReviews/';
 
 class RatingService {
 
