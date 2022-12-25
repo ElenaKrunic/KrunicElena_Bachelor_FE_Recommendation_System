@@ -1,3 +1,48 @@
-//watchlist ce biti samo lista sa filmovima 
-//napraviti na Home.vue prikaz svih filmova iz movies.txt fajla i dodati ispod add to watchlist 
-//napraviti posebnu sekciju za search i tu pretrazujem slanjem zahtjeva na omdb api 
+<template>
+    <div class="list row">
+        <div class="col-md-6">
+            <h4> Movies from watchlist </h4>
+            {{this.watchlistMovies}}
+        </div>
+    </div>
+</template>
+
+<script>
+import axios from '../../axiosConfig';
+import WatchlistService from "@/services/watchlist.service.js";
+
+export default {
+    name : "Watchlist",
+    created() {
+        let token = localStorage.getItem('token');
+        axios.defaults.headers['Authorization'] = `Bearer ${token}`
+        this.getWatchlist()
+    },
+    data() {
+        return {
+            watchlistMovies : []
+        }
+    },
+    methods: {
+        getWatchlist() {
+            WatchlistService.getMoviesFromWatchlist()
+            .then((response) => {
+                this.watchlistMovies = response.data;
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+    }
+}
+
+</script>
+
+<style>
+.list {
+    text-align : left; 
+    max-width : 750px;
+    margin : auto;
+}
+</style>

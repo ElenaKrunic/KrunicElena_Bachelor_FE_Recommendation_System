@@ -1,6 +1,5 @@
 <template>
     <div class="list row">
-        
         <div class="col-md-6">
             <h4> Recommended movies </h4>
             {{this.recommended}}

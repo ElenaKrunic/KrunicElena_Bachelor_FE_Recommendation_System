@@ -26,6 +26,9 @@
             <input type="text" class="form-control" v-model="currentMovie.title"/>
             <router-link :to="'/requestDetailedMovieInfo/' + currentMovie.title" class="badne badge-warning"> Request detailed information about movie </router-link>
         </div>
+
+        <button type="submit" class="badge badge-success" @click="addInWatchlist"> Add to watchlist </button>
+
     </div>
 
     <div v-else>
@@ -35,7 +38,9 @@
 </template>
 
 <script>
+import axios from '../../axiosConfig';
 import MovieService from "@/services/movie.service.js";
+import WatchlistService from "@/services/watchlist.service.js";
 
 export default {
     name : "Movie",
@@ -48,7 +53,10 @@ export default {
             review: '',
         };
     },
-
+    created() {
+        let token = localStorage.getItem('token');
+        axios.defaults.headers['Authorization'] = `Bearer ${token}`
+    },
     methods: {
     
     getMovie(id) {
@@ -61,6 +69,16 @@ export default {
           console.log(e);
         });
     },
+
+    addInWatchlist() {
+        WatchlistService.addInWatchlist(this.$route.params.id)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    }
 
     },
     mounted() {

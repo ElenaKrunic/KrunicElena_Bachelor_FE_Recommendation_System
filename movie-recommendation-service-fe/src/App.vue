@@ -14,6 +14,9 @@
         <li class="nav-item">
           <router-link to="/recommendations" class="nav-link"> Recommendations </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/watchlist" class="nav-link"> Watchlist </router-link>
+        </li>
         <li v-if="showAdminBoard" class="nav-item">
           <router-link to="/admin" class="nav-link">Admin Board</router-link>
         </li> 
