@@ -48,9 +48,9 @@ export default {
         return {
             currentMovie: null,
             message : '',
-            userId: localStorage.getItem("userId"),
             rate: 0,
             review: '',
+            userId: localStorage.getItem("userId"),
         };
     },
     created() {
@@ -71,8 +71,9 @@ export default {
     },
 
     addInWatchlist() {
-        WatchlistService.addInWatchlist(this.$route.params.id)
+        WatchlistService.addInWatchlist(this.userId, this.$route.params.id)
         .then(response => {
+            console.log(this.userId)
             console.log(response);
         })
         .catch(e => {

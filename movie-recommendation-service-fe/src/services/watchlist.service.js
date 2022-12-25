@@ -9,8 +9,8 @@ class WatchlistService {
         return axios.get(API_URL + 'principal/movies', { headers: authHeader()});
     }
 
-    addInWatchlist(id) {
-        return axios.put(API_URL + `addMovieInWatchlist/${id}` , { headers: authHeader()});
+    addInWatchlist(id, movieId) {
+        return axios.put(API_URL + 'addMovieInWatchlist?userId=' + id + '&movieId=' + movieId, { headers: authHeader()}, id , { headers: authHeader()});
     }
 }
 
