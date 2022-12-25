@@ -34,14 +34,21 @@
                     <label><strong> Description </strong></label> {{ currentCustomList.description}}
                 </div>
 
-                <router-link :to="'/editCustomLists/' + currentCustomList.customListId" class="badne badge-warning"> Edit </router-link>
+                <div>
+                    <router-link :to="'/moviesFromList/' + currentCustomList.customListId" class="badne badge-warning"> Get movies from this list </router-link>
+                </div>
+            
+                <div>
+                    <router-link :to="'/editCustomLists/' + currentCustomList.customListId" class="badne badge-warning"> Edit </router-link>
+                </div>
+
             </div>
             <div v-else>
             <br />
                 <p> Please click on a custom list...</p>
-                <router-link to="/addCustomList" class="nav-link"> Add custom list </router-link>
             </div>
         </div>
+        <router-link to="/addCustomList" class="nav-link"> Add custom list </router-link>
     </div>
 </template>
 

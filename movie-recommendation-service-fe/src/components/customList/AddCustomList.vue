@@ -37,6 +37,7 @@
 
 <script>
 import axios from '../../axiosConfig'; 
+import CustomListService from "@/services/customList.service.js";
 
 export default {
     name : "add-customList",
@@ -58,12 +59,10 @@ export default {
     
     methods: {
         saveCustomList() {
-            console.log('pokusava da udje u saveCustomList metodu')
-            axios
-            .post('/api/customLists/createCustomList/', this.customList)
+            CustomListService.create(this.customList)
             .then(response => {
+                console.log(response);
                 alert('dodana nova custom list');
-                response.errorMessage('lalala');
             })
             .catch(error => {
                 console.log(error);

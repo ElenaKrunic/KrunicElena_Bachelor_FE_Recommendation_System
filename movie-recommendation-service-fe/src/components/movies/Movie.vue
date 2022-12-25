@@ -27,6 +27,36 @@
             <router-link :to="'/requestDetailedMovieInfo/' + currentMovie.title" class="badne badge-warning"> Request detailed information about movie </router-link>
         </div>
 
+        <div class="col-md-6">
+            <h6>Custom lists of logged user</h6>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    :class="{ active: index == currentIndex}"
+                    v-for="(customList, index) in customLists"
+                    :key="index"
+                    @click="setActiveCustomList(customList, indx)"
+                >
+                    {{ customList.name }}
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-6">
+            <div v-if="currentCustomList">
+                <h4> Custom list  </h4>
+                <div>
+                    <label><strong> Name </strong></label> {{ currentCustomList.name}}
+                </div>
+                 
+                <button type="submit" class="badge badge-success" @click="addMovieToSelectedList"> add to {{currentCustomList.name}} list </button>
+
+            </div>
+            <div v-else>
+            <br />
+            </div>
+        </div>
+        <button type="submit" class="badge badge-success" @click="addToCustomList"> Add to custom list </button>
+
         <button type="submit" class="badge badge-success" @click="addInWatchlist"> Add to watchlist </button>
 
     </div>
@@ -41,16 +71,20 @@
 import axios from '../../axiosConfig';
 import MovieService from "@/services/movie.service.js";
 import WatchlistService from "@/services/watchlist.service.js";
+import CustomListService from "@/services/customList.service.js";
 
 export default {
     name : "Movie",
     data() {
         return {
             currentMovie: null,
+            currentCustomList: null,
+            customLists: [],
             message : '',
             rate: 0,
             review: '',
             userId: localStorage.getItem("userId"),
+           
         };
     },
     created() {
@@ -79,7 +113,33 @@ export default {
         .catch(e => {
             console.log(e);
         })
-    }
+    },
+
+    addMovieToSelectedList() {
+        CustomListService.addMovieToSelectedList(this.currentCustomList.customListId,this.$route.params.id)
+        .then(response => {
+            console.log(this.currentCustomList.customListId)
+            console.log(response);
+        })
+    },
+
+    addToCustomList() {
+        axios.
+            get('/api/customLists/userCustomList')
+            .then((response) => {
+                this.customLists = response.data;
+                console.log(response.data);               
+        }).
+            catch((error) => {
+            console.log(error);
+            this.errorMessage = 'Ne mogu vratiti podatke'
+       })
+    },
+
+    setActiveCustomList(customList, index) {
+        this.currentCustomList = customList;
+        this.currentIndex = customList ? index : -1;
+    },
 
     },
     mounted() {
