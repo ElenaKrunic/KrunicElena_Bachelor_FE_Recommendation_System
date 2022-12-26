@@ -56,16 +56,14 @@
 
         <button type="submit" class="badge badge-success" @click="addInWatchlist"> Add to watchlist </button>
 
-        <li v-if="editOrDeleteMovie" class="nav-item">
+        <li v-if="showEditOrDeleteMovieButtonAccordingToRole" class="nav-item">
             <button type="submit" class="badge badge-success" @click="editMovie"> Edit </button>
             <button type="submit" class="badge badge-danger mr-2" @click="deleteMovie"> Delete </button>            
         </li> 
 
     </div>
-
     <div v-else>
-        <br />
-        <p> Click on a movie </p>
+        <p> uslo u else </p>
     </div>
 </template>
 
@@ -76,6 +74,19 @@ import WatchlistService from "@/services/watchlist.service.js";
 import CustomListService from "@/services/customList.service.js";
 
 export default {
+    computed: {
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
+
+        showEditOrDeleteMovieButtonAccordingToRole() {
+        if(this.currentUser && this.currentUser['roles']) {
+        return this.currentUser['roles'].includes('ROLE_ADMIN');
+      } 
+
+      return false;
+    },
+    },
     name : "Movie",
     data() {
         return {
@@ -91,9 +102,10 @@ export default {
     created() {
         let token = localStorage.getItem('token');
         axios.defaults.headers['Authorization'] = `Bearer ${token}`
+        this.showEditOrDeleteMovieButtonAccordingToUser()
     },
     methods: {
-    
+
     getMovie(id) {
       MovieService.get(id)
         .then(response => {
@@ -140,14 +152,6 @@ export default {
     setActiveCustomList(customList, index) {
         this.currentCustomList = customList;
         this.currentIndex = customList ? index : -1;
-    },
-
-    editOrDeleteMovie() {
-        if(this.currentUser && this.currentUser['roles']) {
-        return this.currentUser['roles'].includes('ROLE_ADMIN');
-      }
-
-      return false;
     },
 
     editMovie() {
