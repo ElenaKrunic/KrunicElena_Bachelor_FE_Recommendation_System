@@ -21,6 +21,18 @@ class MovieService {
         return axios.put(API_URL + `rateMovie/${id}` , data, { headers: authHeader()})
     }
 
+    insertMovie(id, data) {
+        return axios.post(API_URL + `insertMovie/${id}`, data, { headers: authHeader()})
+    }
+
+    edit(id, data) {
+        return axios.put(API_URL + `updateMovie/${id}`, data, { headers: authHeader()});
+    }
+
+    delete(id) {
+        return axios.delete(API_URL + `deleteMovie/${id}`, { headers: authHeader})
+    }
+
 }
 
 export default new MovieService();

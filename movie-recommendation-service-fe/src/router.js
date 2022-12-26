@@ -4,12 +4,12 @@ import Register from "./components/Register.vue";
 import Movies from "./components/movies/Movies.vue";
 import Movie from "./components/movies/Movie.vue";
 import MovieDetailsFromApi from "./components/movies/MovieDetailsFromApi.vue";
-import AddMovie from "./components/movies/AddMovie.vue";
 import RateMovies from "./components/recommendations/RateMovies.vue";
 import LeaveReview from "./components/recommendations/LeaveReview.vue"
 import Recommendations from "./components/recommendations/Recommendations.vue";
 import Watchlist from "./components/watchlist/Watchlist.vue";
 import MoviesFromCustomList from "./components/customList/MoviesFromCustomList.vue";
+import AddMovie from "./components/movies/AddMovie.vue";
 const Profile = () => import("./components/Profile.vue");
 const AddCustomList = () => import("./components/customList/AddCustomList.vue")
 const CustomLists = () => import("./components/customList/CustomLists.vue");

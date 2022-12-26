@@ -2,31 +2,71 @@
     <div class="container">
       <header class="jumbotron">
         <h3>
-          <strong>{{currentUser.username}}</strong> Profile
+          <strong>{{this.currentUser.username}}</strong> Profile
         </h3>
       </header>
       <p>
-        <strong>Token:</strong>
-        {{currentUser.token.substring(0, 20)}} ... {{currentUser.token.substr(currentUser.token.length - 20)}}
-      </p>
-      <p>
-        <strong>Id:</strong>
-        {{currentUser.id}}
-      </p>
-      <p>
         <strong>Email:</strong>
-        {{currentUser.email}}
+        <input type="text" class="form-control" id="email" v-model="user.email"/>
       </p>
-      <strong>Authorities:</strong>
-      <ul>
-        <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
-      </ul>
+
+      <p>
+        <strong>Last name</strong>
+        <input type="text" class="form-control" id="lastName" v-model="user.lastName"/>
+      </p>
+
+      <p>
+        <strong>First name</strong>
+        <input type="text" class="form-control" id="firstName" v-model="user.firstName"/>
+      </p>
+
+      <p>
+        <strong> Username </strong>
+        <input type="text" class="form-control" id="username" v-model="user.username"/>
+      </p>
+
+      <button type="submit" class="badge badge-success" @click="saveChanges"> Save changes </button>
+      
     </div>
   </template>
   
-  <script>
+<script>
+import UserService from "@/services/user.service.js";
+
   export default {
     name: 'Profile',
+    created() {
+      this.getUser()
+    },
+    data() {
+      return {
+        user: null,
+        userId: localStorage.getItem("userId")
+      };
+    },
+
+    methods: {
+      getUser() {
+        UserService.get(this.userId)
+        .then(response => {
+          this.user = response.data;
+        })
+        .catch(e => {
+          console.log(e);
+        })
+      },
+
+      saveChanges() {
+        UserService.edit(this.userId, this.user)
+          .then(response => {
+            console.log(response.data);
+            alert('Uspjesno izmijenjeni podaci o korisniku!');
+          })
+          .catch(e => {
+            console.log(e);
+          })
+      }
+    },
     computed: {
       currentUser() {
         return this.$store.state.auth.user;

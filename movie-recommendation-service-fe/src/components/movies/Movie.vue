@@ -4,11 +4,8 @@
             <h4> Movie </h4>
             <div class="form-group">
                 <label for="title"><strong> Title </strong></label>
+                <input type="text" class="form-control" id="title" v-model="currentMovie.title"/>
                 {{currentMovie.title}}
-            </div>
-            <div class="form-group">
-                <label for="movieId"><strong> MovieId </strong></label>
-                {{currentMovie.movieId}}
             </div>
         </form>
 
@@ -59,6 +56,11 @@
 
         <button type="submit" class="badge badge-success" @click="addInWatchlist"> Add to watchlist </button>
 
+        <li v-if="editOrDeleteMovie" class="nav-item">
+            <button type="submit" class="badge badge-success" @click="editMovie"> Edit </button>
+            <button type="submit" class="badge badge-danger mr-2" @click="deleteMovie"> Delete </button>            
+        </li> 
+
     </div>
 
     <div v-else>
@@ -83,8 +85,7 @@ export default {
             message : '',
             rate: 0,
             review: '',
-            userId: localStorage.getItem("userId"),
-           
+            userId: localStorage.getItem("userId"),           
         };
     },
     created() {
@@ -140,6 +141,34 @@ export default {
         this.currentCustomList = customList;
         this.currentIndex = customList ? index : -1;
     },
+
+    editOrDeleteMovie() {
+        if(this.currentUser && this.currentUser['roles']) {
+        return this.currentUser['roles'].includes('ROLE_ADMIN');
+      }
+
+      return false;
+    },
+
+    editMovie() {
+        MovieService.edit(this.currentMovie.movieId, this.currentMovie) 
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    },
+
+    deleteMovie() {
+        MovieService.delete(this.currentMovie.movieId)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    }
 
     },
     mounted() {
