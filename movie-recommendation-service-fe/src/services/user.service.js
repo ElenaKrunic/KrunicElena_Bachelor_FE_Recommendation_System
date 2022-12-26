@@ -12,6 +12,10 @@ class UserService {
     edit(id, data) {
         return axios.put(API_URL + 'user?userId=' + id, data, {headers: authHeader()});
     }
+
+    delete(id) {
+        return axios.delete(API_URL + 'user?userId=' + id, {headers: authHeader()});
+    }
 }
 
 export default new UserService();

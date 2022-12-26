@@ -26,6 +26,8 @@
       </p>
 
       <button type="submit" class="badge badge-success" @click="saveChanges"> Save changes </button>
+      <button type="submit" class="badge badge-danger mr-2" @click="deleteUser"> Delete </button>
+
       
     </div>
   </template>
@@ -65,6 +67,16 @@ import UserService from "@/services/user.service.js";
           .catch(e => {
             console.log(e);
           })
+      },
+
+      deleteUser() {
+        UserService.delete(this.userId)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        })
       }
     },
     computed: {
