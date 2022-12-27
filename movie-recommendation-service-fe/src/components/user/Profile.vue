@@ -28,7 +28,8 @@
       <button type="submit" class="badge badge-success" @click="saveChanges"> Save changes </button>
       <button type="submit" class="badge badge-danger mr-2" @click="deleteUser"> Delete </button>
 
-      
+      <router-link :to="'/userAddedMovies/'" class="badne badge-warning"> My added movies </router-link>
+
     </div>
   </template>
   

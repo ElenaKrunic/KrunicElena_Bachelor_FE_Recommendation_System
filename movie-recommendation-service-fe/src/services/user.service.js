@@ -8,6 +8,10 @@ class UserService {
     get(id) {
         return axios.get(API_URL + 'user?userId=' + id, {headers: authHeader()});
     }
+
+    getUsers() {
+        return axios.get(API_URL + 'all', {headers: authHeader()});
+    }
     
     edit(id, data) {
         return axios.put(API_URL + 'user?userId=' + id, data, {headers: authHeader()});

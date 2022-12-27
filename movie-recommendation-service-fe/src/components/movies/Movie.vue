@@ -102,7 +102,6 @@ export default {
     created() {
         let token = localStorage.getItem('token');
         axios.defaults.headers['Authorization'] = `Bearer ${token}`
-        this.showEditOrDeleteMovieButtonAccordingToUser()
     },
     methods: {
 

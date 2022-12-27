@@ -33,6 +33,10 @@ class MovieService {
         return axios.delete(API_URL + `deleteMovie/${id}`, { headers: authHeader})
     }
 
+    getUserAddedMovies() {
+        return axios.get(API_URL + 'getMyMovies', {headers: authHeader()});
+    }
+
 }
 
 export default new MovieService();
