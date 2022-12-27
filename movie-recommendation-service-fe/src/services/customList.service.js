@@ -37,6 +37,10 @@ class CustomListService {
     getMoviesForSelectedList(id) {
         return axios.get(API_URL + `${id}/movies`);
     }
+
+    removeMovieFromCustomList(id, movieId) {
+        return axios.delete(API_URL + `deleteMovieFromCustomList/${id}/${movieId}`, {headers: authHeader()});
+    }
 }
 
 export default new CustomListService();
