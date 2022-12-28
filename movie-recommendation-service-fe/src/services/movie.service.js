@@ -6,7 +6,7 @@ const API_URL = 'http://localhost:2235/api/movies/';
 class MovieService {
 
     get(id) {
-        return axios.get(API_URL + `${id}`, {headers: authHeader()});
+        return axios.get(API_URL + `fullMovie/${id}`, {headers: authHeader()});
     }
     
     getAll() {

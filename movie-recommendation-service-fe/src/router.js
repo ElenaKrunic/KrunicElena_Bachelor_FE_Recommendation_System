@@ -17,6 +17,7 @@ const AddCustomList = () => import("./components/customList/AddCustomList.vue")
 const CustomLists = () => import("./components/customList/CustomLists.vue");
 const CustomList = () => import("./components/customList/CustomList.vue");
 import UserDetails from "./components/user/UserDetails.vue";
+import EditOrDeleteUserAddedMovie from "./components/movies/EditOrDeleteUserAddedMovie.vue"
 const routes = [
     {
       path: "/login",
@@ -97,6 +98,10 @@ const routes = [
     {
       path:"/showUserDetails/:id",
       component: UserDetails
+    },
+    {
+      path:"/editOrDeleteUserAddedMovie/:id",
+      component: EditOrDeleteUserAddedMovie
     }
   ];
   

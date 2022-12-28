@@ -1,13 +1,30 @@
 <template>
-    <div class="list-row">
+    <div class="list row">
         <div class="col-md-6">
-            <h6> My movies </h6>
-            {{this.movies}}
+            <h4> My added movies </h4>
+            <ul class="list-group">
+                <li class="list-group-item"
+                    :class="{ active: index == currentIndex}"
+                    v-for="(movie, index) in movies"
+                    :key="index"
+                    @click="setActiveMovie(movie,indx)"
+                >
+                    {{ movie.title }}
+                </li>
+            </ul>
         </div>
-
-    <button type="submit" class="badge badge-success" @click="editMovie"> Edit </button>
-    <button type="submit" class="badge badge-danger mr-2" @click="deleteMovie"> Delete </button> 
-
+        <div class="col-md-6">
+            <div v-if="currentMovie">  
+                <h4> Movie </h4>
+                <div>
+                    <label><strong>Title</strong></label> {{currentMovie.title}}
+                </div>
+                    <router-link :to="'/showMovieDetails/' + currentMovie.movieId" class="badne badge-warning"> Show movie details </router-link>  
+                <div>
+                    <router-link :to="'/editOrDeleteUserAddedMovie/' + currentMovie.movieId" class="badne badge-warning"> Edit </router-link>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,7 +42,10 @@ export default {
 
     data() {
         return {
-            movies: []
+            movies: [],
+            currentMovie: null,
+            currentIndex: -1,
+            title: ""
         }
     },
 
@@ -42,17 +62,10 @@ export default {
             })
         },
 
-        deleteMovie() {
-        MovieService.delete(this.currentMovie.movieId)
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            })
-    }
-
-
+        setActiveMovie(movie, index) {
+        this.currentMovie = movie;
+        this.currentIndex = movie ? index : -1;
+    },
     }
 }
 </script>
